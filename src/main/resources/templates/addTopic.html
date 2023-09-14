@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new Topics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}"  rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header th:insert="fragments/fragments.html :: header"> </header>
+
+    <main>
+        <div class="container mt-5 mb-1">
+            <h1 class="text-center" th:text="#{create.new.topic}">Create new topic</h1>
+            <form th:action="@{/topics/add}" th:object="${topic}" method="post" class="form">
+                <div>
+                    <label for="title" th:text="#{Title}" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title"
+                           th:field="*{title}" th:placeholder="#{enter.title}" th:errorclass="is-invalid">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error" />
+                    </ul>
+                </div>
+                <div>
+                    <label for="header" th:text="#{Header}" class="form-label">Header</label>
+                    <input type="text" class="form-control" id="header"
+                           th:field="*{header}" th:placeholder="#{enter.header}" th:errorclass="is-invalid">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('header')}" th:text="${err}" class="error" />
+                    </ul>
+                </div>
+
+                <h3>All errors in place:</h3>
+                <div th:if="${#fields.hasAnyErrors()}">
+                    <ul>
+                        <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                    </ul>
+                </div>
+                <input class="btn btn-success" type="submit" value="Add Topic">
+                <input class="btn btn-secondary" type="reset" value="Reset" />
+            </form>
+        </div>
+    </main>
+
+    <footer th:replace="fragments/fragments.html :: footer"> </footer>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.raimis.Blogas.entity;
+package com.raimis.Blogas.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

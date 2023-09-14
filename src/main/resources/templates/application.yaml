@@ -1,0 +1,94 @@
+spring:
+  profiles:
+    group:
+      default:
+        - default
+        - test
+        - h2
+      mysql:
+        - default
+        - test
+        - mysql
+      prod:
+        - default
+        - mysql
+
+
+# Default (safe by default) properties
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+# Disable whitelabel error pages
+server:
+  error:
+    whitelabel:
+      enabled: false
+
+
+# Properties that should suite any test profile
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+
+# Properties that are relevant when running with h2
+---
+spring:
+  config:
+    activate:
+      on-profile: h2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+  datasource:
+    url: "jdbc:h2:mem:blog_db"
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+
+# Properties that are relevant when running with mysql
+---
+spring:
+  config:
+    activate:
+      on-profile: mysql
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    url: "${DATABASE_URL}"
+    username: "${DATABASE_USERNAME}"
+    password: "${DATABASE_PASSWORD}"
