@@ -1,11 +1,12 @@
 package com.raimis.Blogas.entities;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
-
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +18,21 @@ public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-@Column(name = "title")
+    @NotEmpty(message = "{title.missing}")
     private String title;
-@Column(name = "header")
     private String header;
 
-    @OneToMany(mappedBy = "topic", orphanRemoval = true)
+    @OneToMany(mappedBy = "topic", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
-// komentarai, kur ives vartotojai per frontenda
+
+    public void addComment(Comment comment) {
+        comment.setTopic(this);
+        this.comments.add(comment);
+    }
 }
+
+// komentarai, kur ives vartotojai per frontenda
+
 
 
 

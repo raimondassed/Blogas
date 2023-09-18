@@ -24,6 +24,8 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
   jpa:
     hibernate:

@@ -1,0 +1,32 @@
+﻿version: '3.3'
+
+services:
+  blog_db:
+    container_name: blog_db
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: 'ca_blog_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'root_password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'blog_db_data:/var/lib/mysql'
+
+  blog_app:
+    container_name: blog_app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: blog_app_img
+    environment:
+      DATABASE_URL: jdbc:mysql://blog_db:3306/ca_blog_db
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root_password
+      SPRING_PROFILES_ACTIVE: default,in_docker
+    ports:
+      - '8080:8080'
+
+volumes:
+  blog_db_data:
