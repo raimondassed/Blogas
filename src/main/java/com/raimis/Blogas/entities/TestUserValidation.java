@@ -3,18 +3,18 @@ package com.raimis.Blogas.entities;
 import com.raimis.Blogas.util.PhoneNumber;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Table;
 import javax.validation.constraints.*;
 
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "test_validation") // reikalinga tik, kad parodyti kaip veikia validacijos
+//@Table(name = "test_validation") // reikalinga tik, kad parodyti kaip veikia validacijos
 public class TestUserValidation {
 
     @Id
