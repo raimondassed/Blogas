@@ -15,15 +15,18 @@
 
 <main>
     <div class="container mt-5 mb-1">
-        <h3>Written by <span th:text="${topic.title}"></span></h3>
+        <h3 th:text="${topic.title}"></h3>
         <section th:text="${topic.header}"></section>
-        <div th:each="comment : ${topic.comments}">
-            <div class="card">
-                <div class="card-header" th:text="${comment?.createdBy?.username}"></div>
-                <div class="card-body">
-                    <p class="card-text" th:text="${comment.text}"></p>
-                    <a href="#" class="btn btn-primary">Do some action</a>
-                </div>
+        <div th:each="comment : ${topic.comments}" class="card mt-1">
+            <div class="card-header d-flex justify-content-between">
+                <span th:text="${comment?.createdBy?.username}"></span>
+                <span th:text="${#temporals.format(comment?.updatedAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
+            </div>
+            <div class="card-body">
+                <p class="card-text" th:text="${comment.text}"></p>
+                <a th:if="${comment?.createdBy?.username} == ${#authentication.name}" th:text="#{Edit}"
+                   class="btn btn-primary">
+                </a>
             </div>
         </div>
         <div sec:authorize="hasAnyAuthority('USER', 'ADMIN')" class="container">
@@ -41,7 +44,6 @@
                 </p>
             </form>
         </div>
-
         <div class="container">
             <table>
                 <tr th:each="var : ${#vars.getVariableNames()}">
@@ -66,6 +68,7 @@
                 </tr>
             </table>
         </div>
+
 
         <a th:href="@{/topics}">Go to topics list</a>
     </div>
