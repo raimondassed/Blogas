@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -56,9 +57,9 @@ public class TopicController {
         if (result.hasErrors()) {
             return "addTopic";
         }
-        logger.info("New topic={} added", topic);
+        logger.info("New topic={} added");
         Topic savedTopic = topicService.addNewTopic(topic);
-        logger.info("New topic={} saved", savedTopic);
+        logger.info("New topic={} saved");
         return "redirect:/topics";
     }
 

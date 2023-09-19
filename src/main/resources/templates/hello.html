@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <head>
     <title>Hello World!</title>
@@ -12,7 +12,8 @@
 <div sec:authorize="hasAuthority('USER')">Text visible to user.</div>
 <div sec:authorize="hasAuthority('ADMIN')">Text visible to admin.</div>
 <div sec:authorize="isAuthenticated()">Text visible only to
-    authenticated users.</div>
+    authenticated users.
+</div>
 Authenticated username:
 <div sec:authentication="name"></div>
 Authenticated user roles:
@@ -30,6 +31,7 @@ Authenticated user roles:
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
+<a th:href="@{/topics}">Back to Topics</a>
 </body>
 </html>
 

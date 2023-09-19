@@ -50,7 +50,11 @@
         </ul>
       </div>
 
-      <div class="text-end">
+      <div class="text-end" sec:authorize="isAuthenticated()">
+        <a class="btn btn-outline-light me-2" th:text="#{Logout}" th:href="@{/logout}">Logout</a>
+      </div>
+
+      <div class="text-end" sec:authorize="!isAuthenticated()">
         <a class="btn btn-outline-light me-2" th:text="#{Login}" th:href="@{/login}">Login</a>
         <a type="button" class="btn btn-warning" th:text="#{Signup}" th:href="@{/registration}">Sign-up</a>
       </div>

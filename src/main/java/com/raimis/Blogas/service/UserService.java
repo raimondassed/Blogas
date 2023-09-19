@@ -3,6 +3,10 @@ package com.raimis.Blogas.service;
 import com.raimis.Blogas.entities.Role;
 import com.raimis.Blogas.entities.User;
 import com.raimis.Blogas.repo.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -19,7 +23,8 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
 
         if (user == null) {

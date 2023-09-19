@@ -1,5 +1,6 @@
 package com.raimis.Blogas.rest;
 
+import com.raimis.Blogas.entities.Comment;
 import com.raimis.Blogas.entities.Topic;
 import com.raimis.Blogas.rest.dto.TopicDto;
 import com.raimis.Blogas.service.TopicService;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+
+
 
 @Service
 public class TopicEdgeService {

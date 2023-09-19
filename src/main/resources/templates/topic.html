@@ -28,13 +28,13 @@
         </div>
         <div sec:authorize="hasAnyAuthority('USER', 'ADMIN')" class="container">
             <h3>Add new comment</h3>
-            <form th:action="@{/comments}" th:object="${comment}" method="post">
+            <form th:action="@{/comments(topicId=${topic.id})}" th:object="${comment}" method="post">
 
                 <div class="form-group">
                     <label for="commentText">Your new comment</label>
                     <textarea th:field="*{text}" class="form-control" id="commentText" rows="3"></textarea>
                 </div>
-                <input type="hidden" th:field="${topic.id}" >
+                <input type="hidden" th:field="*{topic}" >
                 <p>
                     <input type="reset" value="Clear" class="btn btn-info"/>
                     <input type="submit" value="Submit" class="btn btn-success"/>
