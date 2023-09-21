@@ -32,6 +32,7 @@
         <th scope="col">
           <a th:text="#{Action}">Action</a>
           <a sec:authorize="isAuthenticated()" class="btn btn-success float-end" th:href="@{/topics/add}" th:text="#{Create}">Create</a>
+
         </th>
       </tr>
       </thead>
@@ -60,7 +61,7 @@
     </div>
   </div>
 
-
+  <a th:href="@{/topics/add}">Go to addTopic list</a>
 </main>
 
 <footer th:replace="fragments/fragments.html :: footer"> </footer>
